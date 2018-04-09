@@ -22,7 +22,7 @@ namespace Store_ASP.NET_Project.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View()
+            return View();
         }
         [HttpPost]
         public ActionResult Login(String username, String password)
