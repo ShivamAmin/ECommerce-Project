@@ -20,10 +20,11 @@
                 </button>
                 @Html.ActionLink("eCommerce Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+            @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
+            @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
+            @if (Session["loggedIn"] != null && (bool)Session["loggedIn"]) {
+                @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+             }
         </div>
     </div>
 
