@@ -25,7 +25,7 @@ namespace Store_ASP.NET_Project.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(String username, String password)
+        public ActionResult Login(User user)
         {
             
         }
