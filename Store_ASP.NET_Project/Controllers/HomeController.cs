@@ -33,7 +33,9 @@ namespace Store_ASP.NET_Project.Controllers
                 if(ActualUser.Password == user.Password)
                 {
                     Session["loggedIn"] = true;
-                    return RedirectToAction("Index", "Products", new { area = "" });
+                    Session["userID"] = ActualUser.Id;
+                    Session["userName"] = ActualUser.Username;
+                    return RedirectToAction("Index", "Home", new { area = "" });         
                 }
             }
             return View();

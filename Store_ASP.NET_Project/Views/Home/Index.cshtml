@@ -3,5 +3,17 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Welcome!</h2>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if ((bool)Session["loggedIn"] && Session["userName"] != null)
+    {
+        <h4>Logged in as @HttpContext.Current.Session["userName"].ToString() </h4>
+    } else
+    {
+        <h4>Error! You seem to be logged in, but we could not find your account. Please try to login again.</h4>
+    }
+
+}
