@@ -122,6 +122,17 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Models\StoreContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StoreContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\StoreContext.edmx.diagram">
+      <DependentUpon>StoreContext.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\StoreContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StoreContext.edmx</DependentUpon>
@@ -132,10 +143,6 @@
       <DependentUpon>StoreContext.edmx</DependentUpon>
       <LastGenOutput>StoreContext.cs</LastGenOutput>
     </Content>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -181,13 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\StoreContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>StoreContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\StoreContext.edmx.diagram">
-      <DependentUpon>StoreContext.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

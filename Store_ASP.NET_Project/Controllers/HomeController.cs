@@ -19,12 +19,12 @@ namespace Store_ASP.NET_Project.Controllers
             }
             return View();
         }
-        [HttpGet]
+        [HttpGet, Route("Login")]
         public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost, Route("Login")]
         public ActionResult Login(User user)
         {
             User ActualUser = db.Users.SingleOrDefault(u => u.Username == user.Username);
@@ -38,6 +38,7 @@ namespace Store_ASP.NET_Project.Controllers
             }
             return View();
         }
+        [Route("Logout")]
         public ActionResult Logout()
         {
             Session["loggedIn"] = false;
