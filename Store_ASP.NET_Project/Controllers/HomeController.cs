@@ -3,31 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Store_ASP.NET_Project.Models;
 
 namespace Store_ASP.NET_Project.Controllers
 {
     public class HomeController : Controller
     {
+        private StoreDatabase db = new StoreDatabase();
         // GET: Home
         public ActionResult Index()
         {
-            if(loggedIn)
+            if(Session["loggedIn"] == null || (bool)Session["loggedIn"] == false)
             {
-                return View();
-            } else
-            {
-                RedirectToAction("Login");
+                return RedirectToAction("Login");
             }
+            return View();
         }
-        [HttpGet]
+        [HttpGet, Route("Login")]
         public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Login(String username, String password)
+        [HttpPost, Route("Login")]
+        public ActionResult Login(User user)
         {
-            
+            User ActualUser = db.Users.SingleOrDefault(u => u.Username == user.Username);
+            if(ActualUser != null)
+            {
+                if(ActualUser.Password == user.Password)
+                {
+                    Session["loggedIn"] = true;
+                    Session["userID"] = ActualUser.Id;
+                    Session["userName"] = ActualUser.Username;
+                    return RedirectToAction("Index", "Home", new { area = "" });         
+                }
+            }
+            return View();
+        }
+        [Route("Logout")]
+        public ActionResult Logout()
+        {
+            Session["loggedIn"] = false;
+            return RedirectToAction("Login");
         }
     }
 }
