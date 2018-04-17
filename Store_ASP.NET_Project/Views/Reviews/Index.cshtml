@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Store_ASP.NET_Project.Models.ReviewTbl>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customers Reviews</h2>
+
+<p style="float:right">
+    @Html.ActionLink("Create New", "Create")
+</p>
+ 
+
+@foreach (var item in Model) {
+    
+            @Html.DisplayFor(modelItem => item.productCategory)
+        
+            @Html.DisplayFor(modelItem => item.UsernameComment)
+        
+            @Html.DisplayFor(modelItem => item.Subject)
+       
+            @Html.DisplayFor(modelItem => item.Comment)
+        
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+       
+}
+
+

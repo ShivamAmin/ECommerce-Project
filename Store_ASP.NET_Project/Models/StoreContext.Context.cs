@@ -27,5 +27,6 @@ namespace Store_ASP.NET_Project.Models
     
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ReviewTbl> ReviewTbls { get; set; }
     }
 }

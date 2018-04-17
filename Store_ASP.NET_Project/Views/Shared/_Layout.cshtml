@@ -22,6 +22,7 @@
             </div>
             @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
             @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
+            @Html.ActionLink("Reviews","Index","Reviews", new { area = ""}, new { @class = "navbar-text" })
             @if (Session["loggedIn"] != null && (bool)Session["loggedIn"]) {
                 @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
              }
