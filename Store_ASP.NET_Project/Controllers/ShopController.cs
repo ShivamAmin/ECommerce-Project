@@ -13,6 +13,7 @@ namespace Store_ASP.NET_Project.Controllers
         // GET: Shop
         public ActionResult Index()
         {
+            ViewBag.Categories = db.Products.ToList().Select(x => x.Category).Distinct();
             return View(db.Products.ToList());
         }
     }
