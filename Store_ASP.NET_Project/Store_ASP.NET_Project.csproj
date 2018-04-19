@@ -208,6 +208,7 @@
     <Content Include="Views\Home\Logout.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Shop\Details.cshtml" />
+    <Content Include="Views\Shop\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -61,5 +61,16 @@ namespace Store_ASP.NET_Project.Controllers
             cartList.Remove(cartList.Where(item => item.Id == id).First());
             return Redirect(Request.UrlReferrer.ToString());
         }
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            return View(TempData.Peek("Cart"));
+        }
+        [HttpPost, ActionName("Checkout")]
+        public ActionResult CheckoutConfirmed()
+        {
+            TempData.Remove("Cart");
+            return RedirectToAction("Index");
+        }
     }
 }

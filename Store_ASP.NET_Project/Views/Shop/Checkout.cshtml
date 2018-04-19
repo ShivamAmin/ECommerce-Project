@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Store_ASP.NET_Project.Models.Product>
+
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<h2>Checkout</h2>
+@using (Html.BeginForm())
+{
+    <div class="container" style="margin:5px 0px 5px 0px;">
+        <div class="row">
+            <h3>Your Cart</h3>
+        </div>
+    @if (Model != null)
+     {
+        foreach (var item in Model)
+        {
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="thumbnail" style="display:flex;justify-content:center;margin:0 auto;width:270px;overflow:hidden;"><img style="flex:none;width: auto;height: auto;max-width: 270px;max-height: 200px;vertical-align: middle;" src="@item.Image" height="200" /></div>
+            </div>
+            <div class="col-lg-4">
+                <div class="row">@item.Name</div>
+                <div class="row">@item.Price</div>
+            </div>
+            <div class="col-lg-4">
+                @Html.ActionLink("Remove", "Delete", new { id = item.Id })
+            </div>
+        </div>
+        }
+     }
+        <div class="row">
+            <input class="btn btn-default pull-right" type="submit" value="Place Order" />
+        </div>
+    </div>
+}
