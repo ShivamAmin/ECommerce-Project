@@ -9,7 +9,7 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <!@if ((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && Request.Url.LocalPath != "/Login") { Response.Redirect("~/Login"); } !>
+   
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,7 +22,7 @@
             </div>
             @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
             @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
-            @Html.ActionLink("Chat", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
+            @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
             @if (Session["loggedIn"] != null && (bool)Session["loggedIn"])
             {
                 @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
