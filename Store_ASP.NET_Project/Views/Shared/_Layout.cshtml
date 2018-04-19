@@ -6,10 +6,12 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-   @if((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && Request.Url.LocalPath != "/Login") { Response.Redirect("~/Login"); }
+    @if((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && Request.Url.LocalPath != "/Login") { Response.Redirect("~/Login"); }
+    @if((Session["userType"] != null) && ((int)Session["userType"] != 1) && (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Products" || HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Users")) { Response.Redirect("~/Shop"); }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -20,21 +22,27 @@
                 </button>
                 @Html.ActionLink("eCommerce Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
-            @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
-            @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
-            @if (Session["loggedIn"] != null && (bool)Session["loggedIn"])
-    {
-        @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
-}
-        </div>
+            @if (Session["userType"] != null && (int)Session["userType"] == 1) {
+                @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
+                @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
+                @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
+            }
+            @Html.ActionLink("Shop", "Index", "Shop", new { area = "" }, new { @class = "navbar-text" })
+            @Html.ActionLink("Checkout", "Checkout", "Shop", new { area = "" }, new { @class = "navbar-text" })
+              @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
+            @if (Session["loggedIn"] != null && (bool)Session["loggedIn"]) {
+                @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+            } else {
+                @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+            }
+</div>
     </div>
 
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ECommerce-Project  by Shivam Amin, Salman Mir, J.P Szaflarski, Matthew McCormick, Enzo DeLuca, and Michael Stamatopoulos</p>
+            <p class="pull-right">&copy; @DateTime.Now.Year - ECommerce-Project  by Shivam Amin, Salman Mir, J.P Szaflarski, Matthew McCormick, Enzo DeLuca, and Michael Stamatopoulos</p>
         </footer>
     </div>
 
