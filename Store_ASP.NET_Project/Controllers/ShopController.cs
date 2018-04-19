@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using Store_ASP.NET_Project.Models;
@@ -12,6 +13,7 @@ namespace Store_ASP.NET_Project.Controllers
     {
         private StoreDatabase db = new StoreDatabase();
         // GET: Shop
+        [HttpGet]
         public ActionResult Index()
         {
             ViewBag.Cart = TempData["Cart"];
@@ -71,6 +73,23 @@ namespace Store_ASP.NET_Project.Controllers
         {
             TempData.Remove("Cart");
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Index(FormCollection col)
+        {
+            ViewBag.Cart = TempData["Cart"];
+            ViewBag.Categories = db.Products.ToList().Select(x => x.Category).Distinct();
+            TempData.Keep("Cart");
+            List<Product> results = new List<Product>();
+            if (col["dept"] != "All Categories")
+            {
+                results = db.Products.Where(item => item.Category.Equals(col["dept"], StringComparison.InvariantCultureIgnoreCase)).ToList();
+            } else
+            {
+                results = db.Products.ToList();
+            }
+            results = results.Where(item => Regex.IsMatch(item.Name.ToLower(), ".*" + col["term"].ToLower().Trim() + ".*")).ToList();
+            return View(results);
         }
     }
 }
