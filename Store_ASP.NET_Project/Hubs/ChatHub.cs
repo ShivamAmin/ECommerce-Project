@@ -10,7 +10,7 @@ namespace Store_ASP.NET_Project.Hubs
     {
         public void Send(string name, string message)
         {
-            Clients.All.addNewMessageToPage(name, message);
+            Clients.All.addNewMessageToPage(name, message);// This is the method that sends the message it recives to all clients that are connected 
         }
     }
 }
