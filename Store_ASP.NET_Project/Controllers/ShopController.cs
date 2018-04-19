@@ -77,18 +77,20 @@ namespace Store_ASP.NET_Project.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection col)
         {
+            string dept = col["dept"];
+            string term = col["term"];
             ViewBag.Cart = TempData["Cart"];
             ViewBag.Categories = db.Products.ToList().Select(x => x.Category).Distinct();
             TempData.Keep("Cart");
             List<Product> results = new List<Product>();
-            if (col["dept"] != "All Categories")
+            if (dept != "All Categories")
             {
-                results = db.Products.Where(item => item.Category.Equals(col["dept"], StringComparison.InvariantCultureIgnoreCase)).ToList();
+                results = db.Products.Where(item => item.Category.ToLower() == dept.ToString().ToLower()).ToList();
             } else
             {
                 results = db.Products.ToList();
             }
-            results = results.Where(item => Regex.IsMatch(item.Name.ToLower(), ".*" + col["term"].ToLower().Trim() + ".*")).ToList();
+            results = results.Where(item => Regex.IsMatch(item.Name.ToLower(), ".*" + term.ToLower().Trim() + ".*")).ToList();
             return View(results);
         }
     }

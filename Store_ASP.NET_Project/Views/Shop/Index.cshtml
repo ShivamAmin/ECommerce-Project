@@ -9,21 +9,21 @@
 <h2>Shop</h2>
 @using (Html.BeginForm())
 {
-    <input style="display:none" name="dept" value="All Categories" />
+    <input style="display:none" id="dept" name="dept" value="All Categories" />
     <div class="container">
         <div class="row">
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">All Categories <span class="caret"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id="deptDropDown">All Categories</span> <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">All Categories</a></li>
+                        <li onclick="deptSwitch('All Categories')"><a href="#">All Categories</a></li>
                         @foreach (var item in ViewBag.Categories)
                         {
-                            <li onclick="deptSwitch("@item")"><a href="#">@item</a></li>
+                            <li onclick="deptSwitch('@item')"><a href="#">@item</a></li>
                         }
                     </ul>
                 </div>
-                <input type="text" name="term" class="form-control" style="max-width:100%" placeholder="Search...">
+                <input type="text" id="term" name="term" class="form-control" style="max-width:100%" placeholder="Search...">
                 <div class="input-group-btn">
                     <button type="submit" class="btn btn-success">Go!</button>
                 </div>
@@ -73,5 +73,8 @@
         }
     }
     <script>
-
+        function deptSwitch(dept) {
+            document.getElementById("dept").value = dept;
+            document.getElementById("deptDropDown").innerText = dept;
+        }
     </script>
