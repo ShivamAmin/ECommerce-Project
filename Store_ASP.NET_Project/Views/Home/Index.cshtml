@@ -3,17 +3,18 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Welcome!</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     if ((bool)Session["loggedIn"] && Session["userName"] != null)
     {
+        <h2>Welcome!</h2>
         <h4>Logged in as @HttpContext.Current.Session["userName"].ToString() </h4>
-    } else
+    }
+    else
     {
-        <h4>Error! You seem to be logged in, but we could not find your account. Please try to login again.</h4>
+        <h2>Critical Error!</h2>
+        <h4>You seem to be logged in, but we could not find your account.<br/>If this problem persists, please contact us.</h4>
     }
 
 }
