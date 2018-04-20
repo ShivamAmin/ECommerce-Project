@@ -27,7 +27,7 @@ namespace Store_ASP.NET_Project.Controllers
         [HttpPost, Route("Login")]
         public ActionResult Login(User user)
         {
-            User ActualUser = db.Users.SingleOrDefault(u => u.Username == user.Username);
+            User ActualUser = db.Users.SingleOrDefault(u => u.Username.Equals(user.Username, StringComparison.InvariantCultureIgnoreCase));
             if(ActualUser != null)
             {
                 if(ActualUser.Password == user.Password)
@@ -35,6 +35,7 @@ namespace Store_ASP.NET_Project.Controllers
                     Session["loggedIn"] = true;
                     Session["userID"] = ActualUser.Id;
                     Session["userName"] = ActualUser.Username;
+                    Session["userType"] = ActualUser.Type;
                     return RedirectToAction("Index", "Home", new { area = "" });         
                 }
             }
