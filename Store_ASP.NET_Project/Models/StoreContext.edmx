@@ -17,6 +17,16 @@
           <Property Name="Image" Type="varchar(max)" Nullable="false" />
           <Property Name="Category" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="varbinary" MaxLength="2000" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -27,9 +37,19 @@
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="WishList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WishList" EntityType="Self.WishList" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -48,6 +68,16 @@
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Comment" Type="Binary" MaxLength="2000" FixedLength="false" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,9 +88,19 @@
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityType Name="WishList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="StoreDatabase" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WishLists" EntityType="Self.WishList" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -81,6 +121,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="Models.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Models.User">
               <MappingFragment StoreEntitySet="Users">
@@ -89,6 +140,15 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WishLists">
+            <EntityTypeMapping TypeName="Models.WishList">
+              <MappingFragment StoreEntitySet="WishList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

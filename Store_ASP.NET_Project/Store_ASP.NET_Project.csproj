@@ -195,6 +195,9 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>StoreContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Review.cs">
+      <DependentUpon>StoreContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StoreContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,6 +214,9 @@
       <DependentUpon>StoreContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
+      <DependentUpon>StoreContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WishList.cs">
       <DependentUpon>StoreContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
