@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Store_ASP.NET_Project.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p style="float:right">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+
+    @using (Html.BeginForm("Index", "Reviews", FormMethod.Post))
+    {
+        @Html.DropDownList("productCategory", null, htmlAttributes: new { @class = "form-control" })
+
+        <input id="Submit1" type="submit" value="Go to This Category" />
+    }

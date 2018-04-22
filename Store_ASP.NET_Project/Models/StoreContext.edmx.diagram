@@ -7,7 +7,7 @@
       <Diagram DiagramId="6d4243e74e31457c9402f0c435320e2c" Name="Diagram1">
         <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.Review" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.User" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.User" Width="1.5" PointX="4.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="Models.WishList" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
