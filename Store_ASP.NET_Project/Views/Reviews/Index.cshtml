@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Store_ASP.NET_Project.Models.ReviewTbl>
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -9,22 +10,25 @@
 <p style="float:right">
     @Html.ActionLink("Create New", "Create")
 </p>
- 
+@using (Html.BeginForm("Index", "Reviews", FormMethod.Post))
+{
+    @Html.DropDownList("productCategory", null, htmlAttributes: new { @class = "form-control" })
 
-@foreach (var item in Model) {
-    
-            @Html.DisplayFor(modelItem => item.productCategory)
-        
-            @Html.DisplayFor(modelItem => item.UsernameComment)
-        
-            @Html.DisplayFor(modelItem => item.Subject)
-       
-            @Html.DisplayFor(modelItem => item.Comment)
-        
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-       
+    <input id="Submit1" type="submit" value="Go to This Category" />
 }
+
+@foreach (var item in Model)
+{
+    <hr />
+    <div>
+        <h4>@Html.DisplayFor(modelItem => item.Subject)</h4>
+        <h5>by @Html.DisplayFor(modelItem => item.UsernameComment)</h5>
+        <p>@Html.DisplayFor(modelItem => item.Comment)</p>
+    </div>
+
+}
+
+
+
 
 

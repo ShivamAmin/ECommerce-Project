@@ -18,9 +18,20 @@ namespace Store_ASP.NET_Project.Controllers
         public ActionResult Index()
         {
             //add lists by category in viewBag [refer to petshop lab 7]
-            return View(db.ReviewTbls.ToList());
+            ViewBag.productCategory = new SelectList(db.ReviewTbls,"productCategory","productCategory");
+            List<ReviewTbl> reviewTblList = db.ReviewTbls.Where(item => item.productCategory == "Electronics").ToList();
+            return View(reviewTblList);
 
         }
+
+        [HttpPost]
+        public ActionResult Index(string productCategory)
+        {
+            
+            List<ReviewTbl> reviewTblList =  db.ReviewTbls.Where(item => item.productCategory == productCategory).ToList();
+            return View(reviewTblList);
+        }
+
 
         // GET: Reviews/Details/5
         public ActionResult Details(int? id)
