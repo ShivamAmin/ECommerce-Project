@@ -188,6 +188,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WishListsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +247,7 @@
     <Content Include="Views\Shop\Checkout.cshtml" />
     <Content Include="Views\Chat\Chat.cshtml" />
     <Content Include="Views\Shared\ChatLayout.cshtml" />
+    <Content Include="Views\WishLists\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Store_ASP.NET_Project.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Wishlist</h2>
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Category
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <img src="@Html.DisplayFor(modelItem => item.Image)" alt="Product Image" style="max-height:150px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", "Shop", new { id = item.Id }, null) | 
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+    }
+
+</table>

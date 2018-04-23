@@ -15,9 +15,18 @@ namespace Store_ASP.NET_Project.Models
     public partial class Review
     {
         public int Id { get; set; }
-        public string Category { get; set; }
+        public int Stars { get; set; }
         public string Subject { get; set; }
-        public byte[] Comment { get; set; }
-        public int UserId { get; set; }
+        public string Comment { get; set; }
+        public string UserName { get; set; }
+        public int ProductId { get; set; }
+
+        public Review()
+        {
+            Id = -1;
+            Stars = 0;
+            Comment = "";
+            Subject = "";
+        }
     }
 }

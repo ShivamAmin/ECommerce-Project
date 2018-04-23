@@ -22,20 +22,25 @@
                 </button>
                 @Html.ActionLink("eCommerce Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            @if (Session["userType"] != null && (int)Session["userType"] == 1) {
-                @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
-                @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
-                @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
-            }
+            @if (Session["userType"] != null && (int)Session["userType"] == 1)
+    {
+        @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
+        @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
+        @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
+}
             @Html.ActionLink("Shop", "Index", "Shop", new { area = "" }, new { @class = "navbar-text" })
             @Html.ActionLink("Checkout", "Checkout", "Shop", new { area = "" }, new { @class = "navbar-text" })
-              @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
-            @if (Session["loggedIn"] != null && (bool)Session["loggedIn"]) {
-                @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
-            } else {
-                @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
-            }
-</div>
+            @Html.ActionLink("Wishlist", "Index", "WishLists", new { area = "" }, new { @class = "navbar-text" })
+            @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
+            @if (Session["loggedIn"] != null && (bool)Session["loggedIn"])
+    {
+        @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+}
+else
+{
+        @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+}
+        </div>
     </div>
 
     <div class="container body-content">

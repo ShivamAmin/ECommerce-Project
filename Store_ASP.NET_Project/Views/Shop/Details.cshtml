@@ -9,58 +9,95 @@
 <div>
     <h4>Product</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div style="float:left">
+        <img src="@Html.DisplayFor(modelItem => Model.Image)" alt="Product Image" style="max-height:150px" />
+    </div>
+    <div >
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Stock)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Stock)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Stock)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Stock)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Category)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    
 </div>
 <p>
     @Html.ActionLink("Add to Cart", "Add", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<div>
+    <h2>Reviews</h2>
+    Star Rating: @ViewData["AvgStars"]<br />
+    @Html.ActionLink("Add Review", "ReviewAdd")
+                                      <form action="~/Controllers/ShopController.cs" method="get" target="ReviewAdd">
+                                          Rating:
+                                          <select id="StarsInput">
+                                              <option value="0" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 0 ) {selected}>0</option>
+                                              <option value="1" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 1 ) {selected}>1</option>
+                                              <option value="2" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 2 ) {selected}>2</option>
+                                              <option value="3" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 3 ) {selected}>3</option>
+                                              <option value="4" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 4 ) {selected}>4</option>
+                                              <option value="5" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 5 ) {selected}>5</option>
+                                          </select><br />
+                                          Subject: <input type="text" id="SubjectInput" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Subject)" />
+                                          <br />
+                                          Comment: <textarea id="CommentInput">@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Comment)</textarea>
+                                          <br />
+                                          <imput type="hidden" id="Id" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id)" />
+                                          <imput type="hidden" id="productId" value="@Model.Id" />
+                                          <input type="submit" id="submit" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id == -1 ? "ADD" : "EDIT")" />
+                                      </form>
+
+    @foreach (var review in ViewData["Reviews"] as List<Store_ASP.NET_Project.Models.Review>)
+        {
+        <div>
+            User: @review.UserName
+            Rating: @review.Stars
+            Subject: @review.Subject
+            Comment:
+            <p>
+                @review.Comment
+            </p>
+        </div>
+        }
+    </multiplemodelviewdata.models.departments>
+
+</div>

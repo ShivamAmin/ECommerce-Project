@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -33,9 +34,22 @@ namespace Store_ASP.NET_Project.Controllers
                 return HttpNotFound();
             }
 
+            double avg = db.Reviews.Where(x => x.ProductId == id).Select(x => (double?)x.Stars).Average() ?? 0.0;
+            ViewData["AvgStars"] = avg;
+
+            ViewData["Reviews"] = db.Reviews.Where(x => x.ProductId == id).ToList();
+
+
+
+            string userName = Session["userName"].ToString();
+            List<Review> reviewList = db.Reviews.Where(x => x.UserName == userName && x.ProductId == id).ToList();
+
+            ViewData["UserReview"] = reviewList.Count > 0 ? reviewList.First() : new Review();
+
             TempData.Keep("Cart");
             return View(product);
         }
+
         public ActionResult Add(int? id)
         {
             List<Product> cartList = new List<Product>();
@@ -86,12 +100,43 @@ namespace Store_ASP.NET_Project.Controllers
             if (dept != "All Categories")
             {
                 results = db.Products.Where(item => item.Category.ToLower() == dept.ToString().ToLower()).ToList();
-            } else
+            }
+            else
             {
                 results = db.Products.ToList();
             }
             results = results.Where(item => Regex.IsMatch(item.Name.ToLower(), ".*" + term.ToLower().Trim() + ".*")).ToList();
             return View(results);
+        }
+        public ActionResult WishListAdd(int? id)
+        {
+            WishList wish = new WishList();
+            int nId = id.Value;
+            wish.ProductId = nId;
+            wish.UserId = (int)Session["userID"];
+            db.WishLists.Add(wish);
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [HttpGet]
+        public ActionResult ReviewAdd(Review review)
+        {
+            
+            if(review.Id == -1)
+            {
+                review.UserName = Session["userName"].ToString();
+                review.ProductId
+                db.Reviews.Add(review);
+            } else
+            {
+                Review rev = db.Reviews.Where(i => i.Id == review.Id).Single();
+                rev.Stars = review.Stars;
+                rev.Subject = review.Subject;
+                rev.Comment = review.Comment;
+            }
+            db.SaveChanges();
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }
