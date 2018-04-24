@@ -126,7 +126,7 @@ namespace Store_ASP.NET_Project.Controllers
             if(review.Id == -1)
             {
                 review.UserName = Session["userName"].ToString();
-                review.ProductId
+                //review.ProductId
                 db.Reviews.Add(review);
             } else
             {

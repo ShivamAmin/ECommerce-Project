@@ -89,9 +89,9 @@
     @foreach (var review in ViewData["Reviews"] as List<Store_ASP.NET_Project.Models.Review>)
         {
         <div>
-            User: @review.UserName
-            Rating: @review.Stars
-            Subject: @review.Subject
+            User: @review.UserName<br/>
+            Rating: @review.Stars<br/>
+            Subject: @review.Subject<br/>
             Comment:
             <p>
                 @review.Comment

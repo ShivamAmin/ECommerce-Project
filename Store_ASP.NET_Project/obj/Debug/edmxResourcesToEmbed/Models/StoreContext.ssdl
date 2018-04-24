@@ -16,7 +16,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Stars" Type="int" Nullable="false" />
     <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Comment" Type="varchar" MaxLength="2000" Nullable="false" />
