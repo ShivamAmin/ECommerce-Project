@@ -119,11 +119,14 @@ namespace Store_ASP.NET_Project.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        [HttpPost]
-        public ActionResult ReviewAdd(int id, int productId, int stars, string subject, string comment)
+        [HttpPost, ActionName("Details")]
+        public ActionResult ReviewAdd(FormCollection col)
         {
-            Debug.Write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-                + " stars: " + stars + " subject: " + subject + " comment: " + comment + " prductId: " + productId);
+            int id = Convert.ToInt32(col["id"]);
+            int productId = Convert.ToInt32(col["productId"]);
+            int stars = Convert.ToInt32(col["starsInput"]);
+            string subject = col["subjectInput"];
+            string comment = col["commentInput"];
             if(id == -1)
             {
                 db.Reviews.Add(new Review(stars, subject, comment, Session["userName"].ToString(), productId));
