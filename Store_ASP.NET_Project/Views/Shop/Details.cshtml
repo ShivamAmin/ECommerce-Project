@@ -66,47 +66,40 @@
 <div>
     <h2>Reviews</h2>
     Star Rating: @ViewData["AvgStars"]<br />
-    @Html.ActionLink("Add Review", "ReviewAdd")
-                                      <form action="~/Controllers/ShopController.cs" method="get" target="ReviewAdd">
-                                          Rating:
-                                          <select id="StarsInput">
-                                              <option value="0" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 0 ) {selected}>0</option>
-                                              <option value="1" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 1 ) {selected}>1</option>
-                                              <option value="2" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 2 ) {selected}>2</option>
-                                              <option value="3" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 3 ) {selected}>3</option>
-                                              <option value="4" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 4 ) {selected}>4</option>
-                                              <option value="5" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 5 ) {selected}>5</option>
-                                          </select><br />
-                                          Subject: <input type="text" id="SubjectInput" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Subject)" />
-                                          <br />
-                                          Comment: <textarea id="CommentInput">@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Comment)</textarea>
-                                          <br />
-                                          <imput type="hidden" id="Id" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id)" />
-                                          <imput type="hidden" id="productId" value="@Model.Id" />
-                                          <input type="submit" id="submit" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id == -1 ? "ADD" : "EDIT")" />
-                                      </form>
+    <!--Html.ActionLink("Add Review", "ReviewAdd")-->
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" name="id" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id)" />
+        <input type="hidden" name="productId" value="@Model.Id" />
+        Rating:
+        <select name="starsInput">
+            <option value="0" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 0 ) {selected}>0</option>
+            <option value="1" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 1 ) {selected}>1</option>
+            <option value="2" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 2 ) {selected}>2</option>
+            <option value="3" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 3 ) {selected}>3</option>
+            <option value="4" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 4 ) {selected}>4</option>
+            <option value="5" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 5 ) {selected}>5</option>
+        </select><br />
+        Subject: <input type="text" name="subjectInput" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Subject)" />
+        <br />
+        Comment: <textarea name="commentInput">@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Comment)</textarea>
+        <br />
+        <input type="submit" id="submit" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id == -1 ? "ADD" : "EDIT")" />
+    }
+
 
     @foreach (var review in ViewData["Reviews"] as List<Store_ASP.NET_Project.Models.Review>)
-        {
+    {
         <div>
-            User: @review.UserName<br/>
-            Rating: @review.Stars<br/>
-            Subject: @review.Subject<br/>
+            User: @review.UserName<br />
+            Rating: @review.Stars<br />
+            Subject: @review.Subject<br />
             Comment:
             <p>
                 @review.Comment
             </p>
         </div>
-        }
+    }
     </multiplemodelviewdata.models.departments>
 
 </div>
-<script>
-        function deptSwitch(dept) {
-            document.getElementById("Id").value = reviewId;
-            document.getElementById("productId").innerText = productId;
-            document.getElementById("SubjectInput").innerText = subjectInput;
-            document.getElementById("StarsInput").innerText = starsInput;
-            document.getElementById("CommentInput").innerText = commentInput;
-        }
-</script>

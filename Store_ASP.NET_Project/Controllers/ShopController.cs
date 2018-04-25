@@ -119,21 +119,20 @@ namespace Store_ASP.NET_Project.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        [HttpGet]
-        public ActionResult ReviewAdd(Review review)
+        [HttpPost]
+        public ActionResult ReviewAdd(int id, int productId, int stars, string subject, string comment)
         {
-            
-            if(review.Id == -1)
+            Debug.Write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                + " stars: " + stars + " subject: " + subject + " comment: " + comment + " prductId: " + productId);
+            if(id == -1)
             {
-                review.UserName = Session["userName"].ToString();
-                //review.ProductId
-                db.Reviews.Add(review);
+                db.Reviews.Add(new Review(stars, subject, comment, Session["userName"].ToString(), productId));
             } else
             {
-                Review rev = db.Reviews.Where(i => i.Id == review.Id).Single();
-                rev.Stars = review.Stars;
-                rev.Subject = review.Subject;
-                rev.Comment = review.Comment;
+                Review rev = db.Reviews.Where(i => i.Id == id).Single();
+                rev.Stars = stars;
+                rev.Subject = subject;
+                rev.Comment = comment;
             }
             db.SaveChanges();
             return Redirect(Request.UrlReferrer.ToString());

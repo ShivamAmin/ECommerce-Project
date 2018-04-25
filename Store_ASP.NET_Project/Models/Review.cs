@@ -28,5 +28,14 @@ namespace Store_ASP.NET_Project.Models
             Comment = "";
             Subject = "";
         }
+
+        public Review(int Stars, string Subject, string Comment, string UserName, int ProductId)
+        {
+            this.Stars = Stars;
+            this.Subject = Subject;
+            this.Comment = Comment;
+            this.UserName = UserName;
+            this.ProductId = ProductId;
+        }
     }
 }
