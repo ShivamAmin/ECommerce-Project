@@ -31,12 +31,9 @@ namespace Store_ASP.NET_Project.Controllers
                 wishes = db.WishLists.Where(item => item.UserId == userID).ToList();
                 foreach (WishList wish in wishes)
                 {
-                    myData.Add(wish.ProductId);
-                }
-                foreach (int item in myData)
-                {
                     Product product = new Product();
-                    product = db.Products.Where(i => i.Id == item).Single();
+                    product = db.Products.Where(i => i.Id == wish.ProductId).Single();
+                    product.Stock = wish.Id;
                     products.Add(product);
                 }
             }

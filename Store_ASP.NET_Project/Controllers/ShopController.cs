@@ -22,6 +22,7 @@ namespace Store_ASP.NET_Project.Controllers
             TempData.Keep("Cart");
             return View(db.Products.ToList());
         }
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,7 +42,7 @@ namespace Store_ASP.NET_Project.Controllers
 
 
 
-            string userName = Session["userName"].ToString();
+            string userName = Session["userName"] != null ? Session["userNam"].ToString() : "";
             List<Review> reviewList = db.Reviews.Where(x => x.UserName == userName && x.ProductId == id).ToList();
 
             ViewData["UserReview"] = reviewList.Count > 0 ? reviewList.First() : new Review();
@@ -71,23 +72,27 @@ namespace Store_ASP.NET_Project.Controllers
             TempData.Keep("Cart");
             return Redirect(Request.UrlReferrer.ToString());
         }
+
         public ActionResult Delete(int? id)
         {
             List<Product> cartList = (List<Product>)TempData["Cart"];
             cartList.Remove(cartList.Where(item => item.Id == id).First());
             return Redirect(Request.UrlReferrer.ToString());
         }
+
         [HttpGet]
         public ActionResult Checkout()
         {
             return View(TempData.Peek("Cart"));
         }
+
         [HttpPost, ActionName("Checkout")]
         public ActionResult CheckoutConfirmed()
         {
             TempData.Remove("Cart");
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public ActionResult Index(FormCollection col)
         {
@@ -108,6 +113,7 @@ namespace Store_ASP.NET_Project.Controllers
             results = results.Where(item => Regex.IsMatch(item.Name.ToLower(), ".*" + term.ToLower().Trim() + ".*")).ToList();
             return View(results);
         }
+
         public ActionResult WishListAdd(int? id)
         {
             WishList wish = new WishList();
@@ -127,10 +133,11 @@ namespace Store_ASP.NET_Project.Controllers
             int stars = Convert.ToInt32(col["starsInput"]);
             string subject = col["subjectInput"];
             string comment = col["commentInput"];
-            if(id == -1)
+            if (id == -1)
             {
                 db.Reviews.Add(new Review(stars, subject, comment, Session["userName"].ToString(), productId));
-            } else
+            }
+            else
             {
                 Review rev = db.Reviews.Where(i => i.Id == id).Single();
                 rev.Stars = stars;

@@ -44,7 +44,8 @@ namespace Store_ASP.NET_Project.Controllers
         [Route("Logout")]
         public ActionResult Logout()
         {
-            Session["loggedIn"] = false;
+            Session.Clear();
+            TempData.Clear();
             return RedirectToAction("Login");
         }
         [HttpGet, Route("Register")]
@@ -61,10 +62,11 @@ namespace Store_ASP.NET_Project.Controllers
 
                 List<User> userList = db.Users.Where(i => i.Username == user.Username).ToList();
 
-                User check = userList.Count > 0 ? userList.First() : new User();
+                User check = userList.Count > 0 ? userList.First() : null;
 
                 if (check == null)
                 {
+                    ViewBag.AlertMessage = null;
                     db.Users.Add(user);
                     db.SaveChanges();
                     return RedirectToAction("Index");

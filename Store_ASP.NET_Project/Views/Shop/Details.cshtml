@@ -12,7 +12,7 @@
     <div style="float:left">
         <img src="@Html.DisplayFor(modelItem => Model.Image)" alt="Product Image" style="max-height:150px" />
     </div>
-    <div >
+    <div>
         <dl class="dl-horizontal">
 
             <dt>
@@ -57,7 +57,7 @@
 
         </dl>
     </div>
-    
+
 </div>
 <p>
     @Html.ActionLink("Add to Cart", "Add", new { id = Model.Id }) |
@@ -66,39 +66,57 @@
 <div>
     <h2>Reviews</h2>
     Star Rating: @ViewData["AvgStars"]<br />
-    <!--Html.ActionLink("Add Review", "ReviewAdd")-->
-    @using (Html.BeginForm())
+
+    @if (Session["userID"] != null)
     {
-        <input type="hidden" name="id" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id)" />
-        <input type="hidden" name="productId" value="@Model.Id" />
-        Rating:
-        <select name="starsInput">
-            <option value="0" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 0 ) {selected}>0</option>
-            <option value="1" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 1 ) {selected}>1</option>
-            <option value="2" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 2 ) {selected}>2</option>
-            <option value="3" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 3 ) {selected}>3</option>
-            <option value="4" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 4 ) {selected}>4</option>
-            <option value="5" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 5 ) {selected}>5</option>
-        </select><br />
-        Subject: <input type="text" name="subjectInput" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Subject)" />
-        <br />
-        Comment: <textarea name="commentInput">@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Comment)</textarea>
-        <br />
-        <input type="submit" id="submit" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id == -1 ? "ADD" : "EDIT")" />
+        using (Html.BeginForm())
+        {
+            <input type="hidden" name="id" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id)" />
+            <input type="hidden" name="productId" value="@Model.Id" />
+            Rating:
+            <select name="starsInput">
+                <option value="0" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 0 ) {selected}>0</option>
+                <option value="1" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 1 ) {selected}>1</option>
+                <option value="2" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 2 ) {selected}>2</option>
+                <option value="3" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 3 ) {selected}>3</option>
+                <option value="4" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 4 ) {selected}>4</option>
+                <option value="5" @((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Stars == 5 ) {selected}>5</option>
+            </select><br />
+            Subject: <input type="text" name="subjectInput" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Subject)" />
+            <br />
+            Comment: <textarea name="commentInput">@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Comment)</textarea>
+            <br />
+            <input type="submit" id="submit" value="@((ViewData["UserReview"] as Store_ASP.NET_Project.Models.Review).Id == -1 ? "ADD" : "EDIT")" />
+        }
     }
 
-
-    @foreach (var review in ViewData["Reviews"] as List<Store_ASP.NET_Project.Models.Review>)
+    @if ((ViewData["Reviews"] as List<Store_ASP.NET_Project.Models.Review>).Count > 0)
     {
-        <div>
-            User: @review.UserName<br />
-            Rating: @review.Stars<br />
-            Subject: @review.Subject<br />
-            Comment:
+        foreach (var review in ViewData["Reviews"] as List<Store_ASP.NET_Project.Models.Review>)
+        {
             <p>
-                @review.Comment
+                --------------------------------------------------------------------------------------
             </p>
-        </div>
+            <div>
+                User: @review.UserName<br />
+                Rating: @review.Stars<br />
+                Subject: @review.Subject<br />
+                Comment:
+                <p style="width: 250px">
+                    @review.Comment
+                </p>
+            </div>
+        }
+        <p>
+            --------------------------------------------------------------------------------------
+        </p>
+    }
+    else
+    {
+        <br />
+        <p>
+            No reviews yet.
+        </p>
     }
     </multiplemodelviewdata.models.departments>
 
