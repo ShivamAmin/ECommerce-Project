@@ -19,13 +19,11 @@ namespace Store_ASP.NET_Project.Controllers
             }
             return View();
         }
-
         [HttpGet, Route("Login")]
         public ActionResult Login()
         {
             return View();
         }
-
         [HttpPost, Route("Login")]
         public ActionResult Login(User user)
         {
@@ -43,38 +41,6 @@ namespace Store_ASP.NET_Project.Controllers
             }
             return View();
         }
-
-        [HttpPost, Route("Register")]
-        public ActionResult Register(User user)
-        {
-            User ActualUser = db.Users.SingleOrDefault(u => u.Username.Equals(user.Username, StringComparison.InvariantCultureIgnoreCase));
-            if (ActualUser != null)
-            {
-                if (ActualUser.Password == user.Password)
-                {
-                    Session["loggedIn"] = true;
-                    Session["userID"] = ActualUser.Id;
-                    Session["userName"] = ActualUser.Username;
-                    Session["userType"] = ActualUser.Type;
-                    return RedirectToAction("Index", "Home", new { area = "" });
-                }
-            }
-            return View();
-        }
-
-        [Route("SwitchForm")]
-        public ActionResult SwitchForm()
-        {
-            if(Session["login"] == null || Session["login"] == "login")
-            {
-                Session["login"] = "register";
-            } else
-            {
-                Session["login"] = "login";
-            }
-            return View();
-        }
-
         [Route("Logout")]
         public ActionResult Logout()
         {
