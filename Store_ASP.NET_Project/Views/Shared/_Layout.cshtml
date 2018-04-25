@@ -10,7 +10,8 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    @if ((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() != "Home") { Response.Redirect("~/Login"); }
+    @{IList<String> controllers = new List<String>() { "Home", "Shop", "Chat", "WishLists" };}
+    @if ((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && !controllers.Any(item => item == HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())) { Response.Redirect("~/Login"); }
     @if ((Session["userType"] != null) && ((int)Session["userType"] != 1) && (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Products" || HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Users")) { Response.Redirect("~/Shop"); }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
