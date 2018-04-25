@@ -58,9 +58,21 @@ namespace Store_ASP.NET_Project.Controllers
             user.Type = 0;
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                List<User> userList = db.Users.Where(i => i.Username == user.Username).ToList();
+
+                User check = userList.Count > 0 ? userList.First() : new User();
+
+                if (check == null)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                } else
+                {
+                    ViewBag.AlertMessage = "username already exists";
+                    return View();
+                }
             }
             return RedirectToAction("Login");
         }
