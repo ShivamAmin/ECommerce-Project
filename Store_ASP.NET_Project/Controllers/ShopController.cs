@@ -42,7 +42,7 @@ namespace Store_ASP.NET_Project.Controllers
 
 
 
-            string userName = Session["userName"] != null ? Session["userNam"].ToString() : "";
+            string userName = Session["userName"] != null ? Session["userName"].ToString() : "";
             List<Review> reviewList = db.Reviews.Where(x => x.UserName == userName && x.ProductId == id).ToList();
 
             ViewData["UserReview"] = reviewList.Count > 0 ? reviewList.First() : new Review();
