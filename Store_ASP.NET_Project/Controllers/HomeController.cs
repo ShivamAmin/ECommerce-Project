@@ -47,5 +47,22 @@ namespace Store_ASP.NET_Project.Controllers
             Session["loggedIn"] = false;
             return RedirectToAction("Login");
         }
+        [HttpGet, Route("Register")]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost, Route("Register")]
+        public ActionResult Register(User user)
+        {
+            user.Type = 0;
+            if (ModelState.IsValid)
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Login");
+        }
     }
 }

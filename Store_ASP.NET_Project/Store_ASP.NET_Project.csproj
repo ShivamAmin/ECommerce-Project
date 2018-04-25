@@ -248,6 +248,7 @@
     <Content Include="Views\Chat\Chat.cshtml" />
     <Content Include="Views\Shared\ChatLayout.cshtml" />
     <Content Include="Views\WishLists\Index.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

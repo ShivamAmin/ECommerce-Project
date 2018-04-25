@@ -10,8 +10,8 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    @if((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && Request.Url.LocalPath != "/Login") { Response.Redirect("~/Login"); }
-    @if((Session["userType"] != null) && ((int)Session["userType"] != 1) && (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Products" || HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Users")) { Response.Redirect("~/Shop"); }
+    @if ((Session["loggedIn"] == null || (bool)Session["loggedIn"] == false) && HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() != "Home") { Response.Redirect("~/Login"); }
+    @if ((Session["userType"] != null) && ((int)Session["userType"] != 1) && (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Products" || HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() == "Users")) { Response.Redirect("~/Shop"); }
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -23,26 +23,26 @@
                 @Html.ActionLink("eCommerce Project", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             @if (Session["userType"] != null && (int)Session["userType"] == 1)
-    {
-        @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
-        @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
-        @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
-}
+            {
+                @Html.ActionLink("Products", "Index", "Products", new { area = "" }, new { @class = "navbar-text" })
+                @Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "navbar-text" })
+                @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
+            }
             @Html.ActionLink("Shop", "Index", "Shop", new { area = "" }, new { @class = "navbar-text" })
             @Html.ActionLink("Checkout", "Checkout", "Shop", new { area = "" }, new { @class = "navbar-text" })
             @Html.ActionLink("Wishlist", "Index", "WishLists", new { area = "" }, new { @class = "navbar-text" })
             @Html.ActionLink("Customer Service", "Chat", "Chat", new { area = "" }, new { @class = "navbar-text" })
             @if (Session["loggedIn"] != null && (bool)Session["loggedIn"])
-    {
-        @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
-}
-else
-{
-        @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
-}
+            {
+                @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+            }
+            else
+            {
+                @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "navbar-text pull-right" })
+            }
         </div>
     </div>
-
+    <!--Request.Url.LocalPath != "/Login"-->
     <div class="container body-content">
         @RenderBody()
         <hr />
